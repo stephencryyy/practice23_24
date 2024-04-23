@@ -52,23 +52,31 @@ def plot_regression(x, y, reg):
     a = 0
     b = 0
     c = 0
+    S = 0
     y_plot = 0
     if reg == 'linear':
         a, b = linear_regression(x, y)
         y_plot = a * x_plot + b
+        S = np.sum((a * x + b - y) ** 2)
     elif reg == 'poly':
         a, b, c = poly_regression(x, y)
         y_plot = a * x_plot**2 + b * x_plot + c
+        S = np.sum((a * x**2 + b*x + c - y) ** 2)
     elif reg == 'power':
         a, b = power_regression(x, y)
         y_plot = a * x_plot**b
+        S = np.sum((a * x**b - y) ** 2)
     elif reg == 'exp':
         a, b = exp_regression(x, y)
         y_plot = b * (np.e)**(a * x_plot)
+        S = np.sum((b * (np.e)**(a*x) - y) ** 2)
+
+
 
     plt.plot(x_plot, y_plot, label=f"{reg} regression")
     plt.scatter(x, y, color='red', marker='o', label='Точки')
-    plt.title(f"{reg} regression for coefficients {a:.3f}, {b:.3f}, {c:.3f} .")
+    plt.title(f"{reg} reg for coefs {a:.3f}, {b:.3f}, {c:.3f}"
+              f" square error: {S:.3f}.")
     plt.xlabel('x')
     plt.ylabel('y')
     plt.grid()
