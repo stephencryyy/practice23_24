@@ -81,11 +81,13 @@ def plot_regression(x, y, reg):
     plt.ylabel('y')
     plt.grid()
     plt.show()
-
-
+    return S
 
 
 def plot_all(x,y):
-    for i in ['linear', 'poly', 'exp', 'power']:
-        plot_regression(x, y, i)
+    reg = ['linear', 'poly', 'exp', 'power']
+    Smax = []
+    for i in reg:
+       Smax.append(plot_regression(x, y, i))
+    print (f'{reg[Smax.index(max(Smax))]} is optimal regression')
 
